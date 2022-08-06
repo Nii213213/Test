@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-        <button name="button">すごいぞ新美南吉！</button>
+        <button className="btn btn-secondary">Button</button>
         </h1>
 
         <p className={styles.description}>
