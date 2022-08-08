@@ -14,10 +14,14 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-        <button class="btn btn-outline">Button</button>
-        <button class="btn btn-circle btn-outline">0
+        <div class="grid grid-cols-4 gap-3">
+        <button class="col-span-3 btn btn-outline">Button</button>
+        <button class="btn btn-circle btn-outline">🐰
 </button>
-<button class="btn btn-circle btn-outline">1
+</div>
+        <div class="grid grid-cols-4 gap-3">
+        <button class="btn btn-circle btn-outline">0
+</button><button class="btn btn-circle btn-outline">1
 </button><button class="btn btn-circle btn-outline">2
 </button><button class="btn btn-circle btn-outline">3
 </button><button class="btn btn-circle btn-outline">4
@@ -26,7 +30,6 @@ const Home: NextPage = () => {
 </button><button class="btn btn-circle btn-outline">7
 </button><button class="btn btn-circle btn-outline">8
 </button><button class="btn btn-circle btn-outline">9
-</button><button class="btn btn-circle btn-outline">0
 </button><button class="btn btn-circle btn-outline">.
 </button><button class="btn btn-circle btn-outline">+
 </button><button class="btn btn-circle btn-outline">-
@@ -34,6 +37,7 @@ const Home: NextPage = () => {
 </button><button class="btn btn-circle btn-outline">÷
 </button><button class="btn btn-circle btn-outline">＝
 </button>
+</div>
         </h1>
 
         <p className={styles.description}>
