@@ -18,8 +18,6 @@ const Home: NextPage = () => {
         <button className="col-span-3 btn btn-outline">Button</button>
         <button className="btn btn-circle btn-outline">🐰
 </button>
-</div>
-        <div className="grid grid-cols-4 gap-3">
         <button className="btn btn-circle btn-outline">7
 </button><button className="btn btn-circle btn-outline">8
 </button><button className="btn btn-circle btn-outline">9
