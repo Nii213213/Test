@@ -14,28 +14,28 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-        <div class="grid grid-cols-4 gap-3">
-        <button class="col-span-3 btn btn-outline">Button</button>
-        <button class="btn btn-circle btn-outline">🐰
+        <div className="grid grid-cols-4 gap-3">
+        <button className="col-span-3 btn btn-outline">Button</button>
+        <button className="btn btn-circle btn-outline">🐰
 </button>
 </div>
-        <div class="grid grid-cols-4 gap-3">
-        <button class="btn btn-circle btn-outline">0
-</button><button class="btn btn-circle btn-outline">1
-</button><button class="btn btn-circle btn-outline">2
-</button><button class="btn btn-circle btn-outline">3
-</button><button class="btn btn-circle btn-outline">4
-</button><button class="btn btn-circle btn-outline">5
-</button><button class="btn btn-circle btn-outline">6
-</button><button class="btn btn-circle btn-outline">7
-</button><button class="btn btn-circle btn-outline">8
-</button><button class="btn btn-circle btn-outline">9
-</button><button class="btn btn-circle btn-outline">.
-</button><button class="btn btn-circle btn-outline">+
-</button><button class="btn btn-circle btn-outline">-
-</button><button class="btn btn-circle btn-outline">×
-</button><button class="btn btn-circle btn-outline">÷
-</button><button class="btn btn-circle btn-outline">＝
+        <div className="grid grid-cols-4 gap-3">
+        <button className="btn btn-circle btn-outline">7
+</button><button className="btn btn-circle btn-outline">8
+</button><button className="btn btn-circle btn-outline">9
+</button><button className="btn btn-circle btn-outline">÷
+</button><button className="btn btn-circle btn-outline">4
+</button><button className="btn btn-circle btn-outline">5
+</button><button className="btn btn-circle btn-outline">6
+</button><button className="btn btn-circle btn-outline">×
+</button><button className="btn btn-circle btn-outline">1
+</button><button className="btn btn-circle btn-outline">2
+</button><button className="btn btn-circle btn-outline">3
+</button><button className="btn btn-circle btn-outline">+
+</button><button className="btn btn-circle btn-outline">0
+</button><button className="btn btn-circle btn-outline">.
+</button><button className="btn btn-circle btn-outline">=
+</button><button className="btn btn-circle btn-outline">-
 </button>
 </div>
         </h1>
