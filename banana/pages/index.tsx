@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
         <div className="grid grid-cols-4 gap-3">
-        <button className="col-span-3 btn btn-outline">Button</button>
+        <input type="text" placeholder="You can't touch this" className="col-span-3 input input-bordered w-full max-w-xs" disabled />
         <button className="btn btn-circle btn-outline">🐰
 </button>
         <button className="btn btn-circle btn-outline">7
