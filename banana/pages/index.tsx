@@ -2,12 +2,13 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { useState } from "react";
 
 const Home: NextPage = () => {
-  let display = "9999";
+  const [display, setDisplay] = useState("");
 
   const pressButton = (number: number) => {
-    display = number.toString() + display;
+    setDisplay(`${number}${display}`);
   };
 
   return (
