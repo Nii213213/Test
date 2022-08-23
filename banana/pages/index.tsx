@@ -10,19 +10,15 @@ const Home: NextPage = () => {
   const pressNumber = (number: number) => {
     setDisplay(`${display}${number}`);
   };
-  const pressOperator = (String: String) => {
-    setDisplay(`${display}${String}`);
+  const pressOperator = (operator: string) => {
+    stringOperatorBox = operator;
+    numberMainBox = Number(display); // "123" -> 123
   };
-  const NumberMainBox = (number: number) => {
-    setDisplay(`${display}${String}`);
-  };
-  const NumberSubBox = (number: number) => {
-    setDisplay(`${display}${String}`);
-  };
-  let StringOperatorBox = (String: String) => {
-    setDisplay(`${display}${String}`);
-    NumberMainBox(`${display}`);
-  };
+
+  let numberMainBox: number | undefined;
+  let numberSubBox: number | undefined;
+  let stringOperatorBox: string | undefined;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -48,92 +44,72 @@ const Home: NextPage = () => {
             >
               7
             </button>
-            <button 
+            <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(8)}
             >
               8
             </button>
-            <button 
+            <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(9)}
             >
               9
             </button>
-            <button 
+            <button
               className="btn btn-circle btn-outline"
-              onClick={() => StringOperatorBox("÷")}
+              onClick={() => pressOperator("÷")}
             >
               ÷
             </button>
-            <button 
+            <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(4)}
             >
               4
             </button>
-            <button 
+            <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(5)}
             >
               5
             </button>
-            <button 
+            <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(6)}
             >
               6
             </button>
-            <button 
-              className="btn btn-circle btn-outline"
-            >
-              ×
-            </button>
-            <button 
+            <button className="btn btn-circle btn-outline">×</button>
+            <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(1)}
             >
               1
             </button>
-            <button 
+            <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(2)}
             >
               2
             </button>
-            <button 
+            <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(3)}
             >
               3
             </button>
-            <button 
-              className="btn btn-circle btn-outline"
-            >
-              +
-            </button>
-            <button 
+            <button className="btn btn-circle btn-outline">+</button>
+            <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(0)}
             >
               0
             </button>
-            <button 
-              className="btn btn-circle btn-outline"
-            >
-              .
-            </button>
-            <button 
-              className="btn btn-circle btn-outline"
-            >
-              =
-            </button>
-            <button 
-              className="btn btn-circle btn-outline"
-            >
-              -
-            </button>
-            if 
+            <button className="btn btn-circle btn-outline">.</button>
+            <button className="btn btn-circle btn-outline">=</button>
+            <button className="btn btn-circle btn-outline">-</button>
+            if
           </div>
         </h1>
 
