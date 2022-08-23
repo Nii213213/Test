@@ -10,7 +10,19 @@ const Home: NextPage = () => {
   const pressNumber = (number: number) => {
     setDisplay(`${display}${number}`);
   };
-
+  const pressOperator = (String: String) => {
+    setDisplay(`${display}${String}`);
+  };
+  const NumberMainBox = (number: number) => {
+    setDisplay(`${display}${String}`);
+  };
+  const NumberSubBox = (number: number) => {
+    setDisplay(`${display}${String}`);
+  };
+  let StringOperatorBox = (String: String) => {
+    setDisplay(`${display}${String}`);
+    NumberMainBox(`${display}`);
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -50,6 +62,7 @@ const Home: NextPage = () => {
             </button>
             <button 
               className="btn btn-circle btn-outline"
+              onClick={() => StringOperatorBox("÷")}
             >
               ÷
             </button>
@@ -120,6 +133,7 @@ const Home: NextPage = () => {
             >
               -
             </button>
+            if 
           </div>
         </h1>
 
