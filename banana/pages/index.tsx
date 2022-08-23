@@ -1,9 +1,15 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
+  let display = "9999";
+
+  const pressButton = (number: number) => {
+    display = number.toString() + display;
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,9 +21,20 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           <div className="grid grid-cols-4 gap-3">
-            <input value={'9999'}　type="text" placeholder="You can't touch this" className="col-span-3 input input-bordered w-full max-w-xs" disabled />
+            <input
+              value={display}
+              type="text"
+              placeholder="You can't touch this"
+              className="col-span-3 input input-bordered w-full max-w-xs"
+              disabled
+            />
             <button className="btn btn-circle btn-outline">🐰</button>
-            <button className="btn btn-circle btn-outline">7</button>
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressButton(7)}
+            >
+              7
+            </button>
             <button className="btn btn-circle btn-outline">8</button>
             <button className="btn btn-circle btn-outline">9</button>
             <button className="btn btn-circle btn-outline">÷</button>
@@ -37,7 +54,7 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
 
@@ -72,7 +89,7 @@ const Home: NextPage = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
