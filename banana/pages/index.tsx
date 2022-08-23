@@ -7,6 +7,10 @@ const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
 
   let judge: boolean | undefined;
+  let judge2: boolean | undefined;
+  let numberMainBox: number | undefined;
+  let numberSubBox: number | undefined;
+  let stringOperatorBox: string | undefined;
 
   const pressNumber = (number: number) => {
     setDisplay(`${display}${number}`);
@@ -17,13 +21,15 @@ const Home: NextPage = () => {
   };
   const pressOperator = (operator: string) => {
     stringOperatorBox = operator;
-    judge = true;
-    numberMainBox = Number(display); // "123" -> 123
-  };
-  let numberMainBox: number | undefined;
-  let numberSubBox: number | undefined;
-  let stringOperatorBox: string | undefined;
-
+    if(judge = true){
+      numberMainBox = Number(display);
+    } // "123" -> 123
+    if(stringOperatorBox === "÷" && judge === true){
+      numberMainBox=numberMainBox/
+      numberSubBox;
+      setDisplay(`${numberMainBox}`);
+    };
+  }
   return (
     <div className={styles.container}>
       <Head>
