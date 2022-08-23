@@ -1,20 +1,24 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
 
 const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
 
+  let judge: boolean | undefined ;
+
   const pressNumber = (number: number) => {
     setDisplay(`${display}${number}`);
+    if(judge === true){setDisplay('undifined');setDisplay(`${display}${number}`)}
+    setDisplay
+    judge = false
   };
   const pressOperator = (operator: string) => {
     stringOperatorBox = operator;
+    judge = true
     numberMainBox = Number(display); // "123" -> 123
   };
-
   let numberMainBox: number | undefined;
   let numberSubBox: number | undefined;
   let stringOperatorBox: string | undefined;
@@ -109,7 +113,7 @@ const Home: NextPage = () => {
             <button className="btn btn-circle btn-outline">.</button>
             <button className="btn btn-circle btn-outline">=</button>
             <button className="btn btn-circle btn-outline">-</button>
-            if
+            
           </div>
         </h1>
 
