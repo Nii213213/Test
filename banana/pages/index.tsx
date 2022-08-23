@@ -6,17 +6,18 @@ import { useState } from "react";
 const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
 
-  let judge: boolean | undefined ;
+  let judge: boolean | undefined;
 
   const pressNumber = (number: number) => {
     setDisplay(`${display}${number}`);
-    if(judge === true){setDisplay('undifined');setDisplay(`${display}${number}`)}
-    setDisplay
-    judge = false
+    if (judge === true) {
+      setDisplay(`${number}`);
+    }
+    judge = false;
   };
   const pressOperator = (operator: string) => {
     stringOperatorBox = operator;
-    judge = true
+    judge = true;
     numberMainBox = Number(display); // "123" -> 123
   };
   let numberMainBox: number | undefined;
@@ -113,7 +114,6 @@ const Home: NextPage = () => {
             <button className="btn btn-circle btn-outline">.</button>
             <button className="btn btn-circle btn-outline">=</button>
             <button className="btn btn-circle btn-outline">-</button>
-            
           </div>
         </h1>
 
