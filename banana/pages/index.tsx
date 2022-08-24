@@ -29,17 +29,6 @@ const Home: NextPage = () => {
       numberMainBox = numberMainBox / numberSubBox;
       setDisplay(`${numberMainBox}`);
     }
-    if(judgeOperatorBox === true){
-      numberSubBox = Number(display)
-    }
-    if(judgeOperatorBox === false){
-      numberMainBox = Number(display)
-    }
-    judgeOperatorBox = true;
-    if (judgeMainBox === true) {
-      numberMainBox = Number(display);
-    }
-
     setDisplay(`${numberMainBox}`);
     judgeMainBox = true;
     stringOperatorBox = operator;
