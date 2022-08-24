@@ -8,29 +8,27 @@ const Home: NextPage = () => {
 
   let judgeMainBox: boolean | undefined;
   let judgeOperatorBox: boolean | false;
-  let numberMainBox: number | undefined;
+  let numberMainBox: number | false;
   let numberSubBox: number | undefined;
   let stringOperatorBox: string | undefined;
 
   const pressNumber = (number: number) => {
-    if (judgeOperatorBox === true && judgeMainBox=== true ) {
-      numberSubBox = Number(`${display}`)
-    }else if (judgeOperatorBox === true && judgeMainBox=== false){
+    if (judgeOperatorBox === true) {
       numberMainBox = Number(`${display}`)
       judgeMainBox = true;
+      setDisplay(`${number}`);
+    } else  {
+      setDisplay(`${display}${number}`);
     }
-    setDisplay(`${display}${number}`);
   };
 
   const pressOperator = (operator: string) => {
     const condition = judgeOperatorBox === true && stringOperatorBox === "÷";
 
-    if (condition && numberMainBox && numberSubBox) {
-      numberMainBox = numberMainBox / numberSubBox;
+    if (condition && numberMainBox ) {
+      numberMainBox = numberMainBox / Number(`${display}`)
       setDisplay(`${numberMainBox}`);
     }
-    setDisplay(`${numberMainBox}`);
-    judgeMainBox = true;
     stringOperatorBox = operator;
     judgeOperatorBox =  true;
   };
