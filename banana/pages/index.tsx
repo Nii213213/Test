@@ -20,22 +20,23 @@ const Home: NextPage = () => {
     judge = false;
   };
   const pressOperator = (operator: string) => {
-    if(judge2 === true && stringOperatorBox === "÷"){
-      numberMainBox=numberMainBox/numberSubBox;
+    const condition = judge2 === true && stringOperatorBox === "÷";
+
+    if (condition && numberMainBox && numberSubBox) {
+      numberMainBox = numberMainBox / numberSubBox;
       setDisplay(`${numberMainBox}`);
-      numberSubBox = undefined
+      numberSubBox = undefined;
     }
     stringOperatorBox = operator;
     judge2 = true;
-    if(judge === true){
+    if (judge === true) {
       numberMainBox = Number(display);
-    } 
-    
-      setDisplay(`${numberMainBox}`);
-      judge = true;
-    };
-    
-  
+    }
+
+    setDisplay(`${numberMainBox}`);
+    judge = true;
+  };
+
   return (
     <div className={styles.container}>
       <Head>
