@@ -23,11 +23,12 @@ const Home: NextPage = () => {
     stringOperatorBox = operator;
     if(judge === true){
       numberMainBox = Number(display);
-    } // "123" -> 123
+    } 
     if(stringOperatorBox === "÷" && judge === true){
       numberMainBox=numberMainBox/numberSubBox;
       setDisplay(`${numberMainBox}`);
     };
+    judge = true;
   }
   return (
     <div className={styles.container}>
