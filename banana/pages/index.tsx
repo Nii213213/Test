@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
 
   let judge: boolean | undefined;
-  let judge2: boolean | false;
+  let judgeOperatorBox: boolean | false;
   let numberMainBox: number | undefined;
   let numberSubBox: number | undefined;
   let stringOperatorBox: string | undefined;
@@ -20,15 +20,21 @@ const Home: NextPage = () => {
     judge = false;
   };
   const pressOperator = (operator: string) => {
-    const condition = judge2 === true && stringOperatorBox === "÷";
+    stringOperatorBox = operator;
+    const condition = judgeOperatorBox === true && stringOperatorBox === "÷";
 
     if (condition && numberMainBox && numberSubBox) {
       numberMainBox = numberMainBox / numberSubBox;
       setDisplay(`${numberMainBox}`);
       numberSubBox = undefined;
     }
-    stringOperatorBox = operator;
-    judge2 = true;
+    if(judgeOperatorBox === true){
+      numberSubBox = Number(display)
+    }
+    if(judgeOperatorBox === false){
+      numberMainBox = Number(display)
+    }
+    judgeOperatorBox = true;
     if (judge === true) {
       numberMainBox = Number(display);
     }
