@@ -32,9 +32,10 @@ const Home: NextPage = () => {
     } 
     
       setDisplay(`${numberMainBox}`);
+      judge = true;
     };
-    judge = true;
-  }
+    
+  
   return (
     <div className={styles.container}>
       <Head>
