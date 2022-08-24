@@ -21,12 +21,11 @@ const Home: NextPage = () => {
   };
   const pressOperator = (operator: string) => {
     stringOperatorBox = operator;
-    if(judge = true){
+    if(judge === true){
       numberMainBox = Number(display);
     } // "123" -> 123
     if(stringOperatorBox === "÷" && judge === true){
-      numberMainBox=numberMainBox/
-      numberSubBox;
+      numberMainBox=numberMainBox/numberSubBox;
       setDisplay(`${numberMainBox}`);
     };
   }
