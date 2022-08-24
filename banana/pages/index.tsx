@@ -6,27 +6,28 @@ import { useState } from "react";
 const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
 
-  let judge: boolean | undefined;
+  let judgeMainBox: boolean | undefined;
   let judgeOperatorBox: boolean | false;
   let numberMainBox: number | undefined;
   let numberSubBox: number | undefined;
   let stringOperatorBox: string | undefined;
 
   const pressNumber = (number: number) => {
-    setDisplay(`${display}${number}`);
-    if (judge === true) {
-      setDisplay(`${number}`);
+    if (judgeOperatorBox === true && judgeMainBox=== true ) {
+      numberSubBox = Number(`${display}`)
+    }else if (judgeOperatorBox === true && judgeMainBox=== false){
+      numberMainBox = Number(`${display}`)
+      judgeMainBox = true;
     }
-    judge = false;
+    setDisplay(`${display}${number}`);
   };
+
   const pressOperator = (operator: string) => {
-    stringOperatorBox = operator;
     const condition = judgeOperatorBox === true && stringOperatorBox === "÷";
 
     if (condition && numberMainBox && numberSubBox) {
       numberMainBox = numberMainBox / numberSubBox;
       setDisplay(`${numberMainBox}`);
-      numberSubBox = undefined;
     }
     if(judgeOperatorBox === true){
       numberSubBox = Number(display)
@@ -35,12 +36,14 @@ const Home: NextPage = () => {
       numberMainBox = Number(display)
     }
     judgeOperatorBox = true;
-    if (judge === true) {
+    if (judgeMainBox === true) {
       numberMainBox = Number(display);
     }
 
     setDisplay(`${numberMainBox}`);
-    judge = true;
+    judgeMainBox = true;
+    stringOperatorBox = operator;
+    judgeOperatorBox =  true;
   };
 
   return (
