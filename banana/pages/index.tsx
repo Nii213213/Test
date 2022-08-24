@@ -5,32 +5,30 @@ import { useState } from "react";
 
 const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
-
-  let judgeMainBox: boolean | undefined;
-  let judgeOperatorBox: boolean | false;
-  let numberMainBox: number | false;
-  let numberSubBox: number | undefined;
-  let stringOperatorBox: string | undefined;
+  const [lastOperator, setLastOperator] = useState<string | null>(null);
+  const [isLastInputOperator, setIsLastInputOperator] = useState<
+    boolean | null
+  >(null);
+  const [numberMainBox, setNumberMainBox] = useState<number | null>(null);
 
   const pressNumber = (number: number) => {
-    if (judgeOperatorBox === true) {
-      numberMainBox = Number(`${display}`)
-      judgeMainBox = true;
+    if (isLastInputOperator) {
+      setNumberMainBox(Number(`${display}`));
       setDisplay(`${number}`);
-    } else  {
+    } else {
       setDisplay(`${display}${number}`);
     }
   };
 
   const pressOperator = (operator: string) => {
-    const condition = judgeOperatorBox === true && stringOperatorBox === "÷";
-
-    if (condition && numberMainBox ) {
-      numberMainBox = numberMainBox / Number(`${display}`)
-      setDisplay(`${numberMainBox}`);
+    if (lastOperator === "÷" && numberMainBox) {
+      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
+      const calcResult = numberMainBox / Number(`${display}`);
+      setNumberMainBox(calcResult);
+      setDisplay(`${calcResult}`);
     }
-    stringOperatorBox = operator;
-    judgeOperatorBox =  true;
+    setIsLastInputOperator(true);
+    setLastOperator(operator);
   };
 
   return (
