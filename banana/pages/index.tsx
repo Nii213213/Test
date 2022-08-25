@@ -2,9 +2,10 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
+import { isUndefined } from "util";
 
 const Home: NextPage = () => {
-  const [display, setDisplay] = useState("");
+  const [display, setDisplay] = useState<string | null>(null);
   const [lastOperator, setLastOperator] = useState<string | null>(null);
   const [isLastInputOperator, setIsLastInputOperator] = useState<
     boolean | null
@@ -47,6 +48,12 @@ const Home: NextPage = () => {
     }
     setIsLastInputOperator(true);
     setLastOperator(operator);
+    if (lastOperator === "reset" && numberMainBox) {
+      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
+      setNumberMainBox(null);
+      setDisplay("null");
+      setLastOperator(null);
+    }
   };
 
   return (
@@ -67,7 +74,11 @@ const Home: NextPage = () => {
               className="col-span-3 input input-bordered w-full max-w-xs"
               disabled
             />
-            <button className="btn btn-circle btn-outline">🐰</button>
+            <button className="btn btn-circle btn-outline"
+            onClick={() => pressOperator("reset")}
+            >
+              🐰
+            </button>
             <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(7)}
