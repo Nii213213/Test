@@ -21,6 +21,24 @@ const Home: NextPage = () => {
   };
 
   const pressOperator = (operator: string) => {
+    if (lastOperator === "+" && numberMainBox) {
+      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
+      const calcResult = numberMainBox + Number(`${display}`);
+      setNumberMainBox(calcResult);
+      setDisplay(`${calcResult}`);
+    }
+    if (lastOperator === "-" && numberMainBox) {
+      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
+      const calcResult = numberMainBox - Number(`${display}`);
+      setNumberMainBox(calcResult);
+      setDisplay(`${calcResult}`);
+    }
+    if (lastOperator === "×" && numberMainBox) {
+      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
+      const calcResult = numberMainBox * Number(`${display}`);
+      setNumberMainBox(calcResult);
+      setDisplay(`${calcResult}`);
+    }
     if (lastOperator === "÷" && numberMainBox) {
       // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
       const calcResult = numberMainBox / Number(`${display}`);
@@ -92,7 +110,11 @@ const Home: NextPage = () => {
             >
               6
             </button>
-            <button className="btn btn-circle btn-outline">×</button>
+            <button className="btn btn-circle btn-outline"
+            onClick={() => pressOperator("×")}
+            >
+              ×
+            </button>
             <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(1)}
@@ -111,7 +133,11 @@ const Home: NextPage = () => {
             >
               3
             </button>
-            <button className="btn btn-circle btn-outline">+</button>
+            <button className="btn btn-circle btn-outline"
+            onClick={() => pressOperator("+")}
+            >
+              +
+            </button>
             <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(0)}
@@ -120,7 +146,11 @@ const Home: NextPage = () => {
             </button>
             <button className="btn btn-circle btn-outline">.</button>
             <button className="btn btn-circle btn-outline">=</button>
-            <button className="btn btn-circle btn-outline">-</button>
+            <button className="btn btn-circle btn-outline"
+            onClick={() => pressOperator("-")}
+            >
+              -
+            </button>
           </div>
         </h1>
 
