@@ -145,7 +145,11 @@ const Home: NextPage = () => {
               0
             </button>
             <button className="btn btn-circle btn-outline">.</button>
-            <button className="btn btn-circle btn-outline">=</button>
+            <button className="btn btn-circle btn-outline"
+            onClick={() => pressOperator("=")}
+            >
+              =
+            </button>
             <button className="btn btn-circle btn-outline"
             onClick={() => pressOperator("-")}
             >
