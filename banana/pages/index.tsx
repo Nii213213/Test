@@ -5,7 +5,7 @@ import { useState } from "react";
 import { isUndefined } from "util";
 
 const Home: NextPage = () => {
-  const [display, setDisplay] = useState<string | null>(null);
+  const [display, setDisplay] = useState("");
   const [lastOperator, setLastOperator] = useState<string | null>(null);
   const [isLastInputOperator, setIsLastInputOperator] = useState<
     boolean | null
@@ -46,13 +46,15 @@ const Home: NextPage = () => {
       setNumberMainBox(calcResult);
       setDisplay(`${calcResult}`);
     }
-    setIsLastInputOperator(true);
     setLastOperator(operator);
-    if (lastOperator === "reset" && numberMainBox) {
+    setIsLastInputOperator(true);
+
+    if (operator === "reset") {
       // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
       setNumberMainBox(null);
-      setDisplay("null");
+      setDisplay ("");
       setLastOperator(null);
+      setIsLastInputOperator(false); 
     }
   };
 
