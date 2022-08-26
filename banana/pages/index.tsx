@@ -73,14 +73,9 @@ const Home: NextPage = () => {
               value={display}
               type="text"
               placeholder="You can't touch this"
-              className="col-span-3 input input-bordered w-full max-w-xs"
+              className="col-span-4 input input-bordered w-full max-w-xs"
               disabled
             />
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("reset")}
-            >
-              🐰
-            </button>
             <button
               className="btn btn-circle btn-outline"
               onClick={() => pressNumber(7)}
@@ -99,11 +94,10 @@ const Home: NextPage = () => {
             >
               9
             </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressOperator("÷")}
+            <button className="btn btn-circle btn-outline"
+            onClick={() => pressOperator("reset")}
             >
-              ÷
+              🐰
             </button>
             <button
               className="btn btn-circle btn-outline"
@@ -124,9 +118,9 @@ const Home: NextPage = () => {
               6
             </button>
             <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("×")}
+            onClick={() => pressOperator("=")}
             >
-              ×
+              =
             </button>
             <button
               className="btn btn-circle btn-outline"
@@ -157,11 +151,16 @@ const Home: NextPage = () => {
             >
               0
             </button>
-            <button className="btn btn-circle btn-outline">.</button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("=")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("÷")}
             >
-              =
+              ÷
+            </button>
+            <button className="btn btn-circle btn-outline"
+            onClick={() => pressOperator("×")}
+            >
+              ×
             </button>
             <button className="btn btn-circle btn-outline"
             onClick={() => pressOperator("-")}
