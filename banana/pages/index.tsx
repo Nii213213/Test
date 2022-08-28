@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 import { useState, useCallback } from "react";
 import NumberButton from "@components/NumberButton";
 import NumberDisplay from "@components/NumberDisplay";
+import OperatorButton from "@components/OperatorButton";
 
 const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
@@ -57,7 +58,7 @@ const Home: NextPage = () => {
     setLastOperator(operator);
     setIsLastInputOperator(true);
 
-    if (operator === "reset") {
+    if (operator === "🐰") {
       // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
       setNumberMainBox(null);
       setDisplay("");
@@ -81,84 +82,19 @@ const Home: NextPage = () => {
             <NumberButton num={7} onPressNumber={pressNumber} />
             <NumberButton num={8} onPressNumber={pressNumber} />
             <NumberButton num={9} onPressNumber={pressNumber} />
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressOperator("reset")}
-            >
-              🐰
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(4)}
-            >
-              4
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(5)}
-            >
-              5
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(6)}
-            >
-              6
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressOperator("=")}
-            >
-              =
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(1)}
-            >
-              1
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(2)}
-            >
-              2
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(3)}
-            >
-              3
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressOperator("+")}
-            >
-              +
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(0)}
-            >
-              0
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressOperator("÷")}
-            >
-              ÷
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressOperator("×")}
-            >
-              ×
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressOperator("-")}
-            >
-              -
-            </button>
+            <OperatorButton operator={"🐰"} onPressOperator={pressOperator}/>
+            <NumberButton num={4} onPressNumber={pressNumber} />
+            <NumberButton num={5} onPressNumber={pressNumber} />
+            <NumberButton num={6} onPressNumber={pressNumber} />
+            <OperatorButton operator={"="} onPressOperator={pressOperator}/>
+            <NumberButton num={1} onPressNumber={pressNumber} />
+            <NumberButton num={2} onPressNumber={pressNumber} />
+            <NumberButton num={3} onPressNumber={pressNumber} />
+            <OperatorButton operator={"+"} onPressOperator={pressOperator}/>
+            <NumberButton num={0} onPressNumber={pressNumber} />
+            <OperatorButton operator={"÷"} onPressOperator={pressOperator}/>
+            <OperatorButton operator={"×"} onPressOperator={pressOperator}/>
+            <OperatorButton operator={"-"} onPressOperator={pressOperator}/>
           </div>
         </h1>
       </main>
