@@ -23,7 +23,6 @@ const Home: NextPage = () => {
   };
 
   const calculate = (operator: string, num1: number, num2: number): number => {
-    console.log(operator);
     switch (operator) {
       case "+":
         return num1 + num2;
@@ -32,7 +31,7 @@ const Home: NextPage = () => {
       case "×":
         return num1 * num2;
       case "÷":
-        return num2 / num2;
+        return num1 / num2;
       default:
         return num1;
     }
