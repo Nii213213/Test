@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { useState } from "react";
-import { isUndefined } from "util";
+import { useState, useCallback } from "react";
+import NumberButton from "@components/NumberButton";
+import NumberDisplay from "@components/NumberDisplay";
 
 const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
@@ -12,15 +13,19 @@ const Home: NextPage = () => {
   >(null);
   const [numberMainBox, setNumberMainBox] = useState<number | null>(null);
 
-  const pressNumber = (number: number) => {
-    setIsLastInputOperator(false);
-    if (isLastInputOperator) {
-      setNumberMainBox(Number(`${display}`));
-      setDisplay(`${number}`);
-    } else {
-      setDisplay(`${display}${number}`);
-    }
-  };
+  const pressNumber = useCallback(
+    (number: number) => {
+      if (isLastInputOperator) {
+        setIsLastInputOperator(false);
+
+        setNumberMainBox(Number(`${display}`));
+        setDisplay(`${number}`);
+      } else {
+        setDisplay((current) => `${current}${number}`);
+      }
+    },
+    [isLastInputOperator]
+  );
 
   const calculate = (operator: string, num1: number, num2: number): number => {
     switch (operator) {
@@ -72,31 +77,10 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           <div className="grid grid-cols-4 gap-3">
-            <input
-              value={display}
-              type="text"
-              placeholder="You can't touch this"
-              className="col-span-4 input input-bordered w-full max-w-xs"
-              disabled
-            />
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(7)}
-            >
-              7
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(8)}
-            >
-              8
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(9)}
-            >
-              9
-            </button>
+            <NumberDisplay display={display} />
+            <NumberButton num={7} onPressNumber={pressNumber} />
+            <NumberButton num={8} onPressNumber={pressNumber} />
+            <NumberButton num={9} onPressNumber={pressNumber} />
             <button
               className="btn btn-circle btn-outline"
               onClick={() => pressOperator("reset")}
