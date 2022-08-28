@@ -13,6 +13,7 @@ const Home: NextPage = () => {
   const [numberMainBox, setNumberMainBox] = useState<number | null>(null);
 
   const pressNumber = (number: number) => {
+    setIsLastInputOperator(false);
     if (isLastInputOperator) {
       setNumberMainBox(Number(`${display}`));
       setDisplay(`${number}`);
@@ -21,40 +22,43 @@ const Home: NextPage = () => {
     }
   };
 
+  const calculate = (operator: string, num1: number, num2: number): number => {
+    console.log(operator);
+    switch (operator) {
+      case "+":
+        return num1 + num2;
+      case "-":
+        return num1 - num2;
+      case "×":
+        return num1 * num2;
+      case "÷":
+        return num2 / num2;
+      default:
+        return num1;
+    }
+  };
+
   const pressOperator = (operator: string) => {
-    if (lastOperator === "+" && numberMainBox) {
-      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
-      const calcResult = numberMainBox + Number(`${display}`);
+    if (numberMainBox) {
+      const calcResult = calculate(
+        lastOperator!,
+        numberMainBox,
+        Number(display)
+      );
+
       setNumberMainBox(calcResult);
       setDisplay(`${calcResult}`);
     }
-    if (lastOperator === "-" && numberMainBox) {
-      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
-      const calcResult = numberMainBox - Number(`${display}`);
-      setNumberMainBox(calcResult);
-      setDisplay(`${calcResult}`);
-    }
-    if (lastOperator === "×" && numberMainBox) {
-      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
-      const calcResult = numberMainBox * Number(`${display}`);
-      setNumberMainBox(calcResult);
-      setDisplay(`${calcResult}`);
-    }
-    if (lastOperator === "÷" && numberMainBox) {
-      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
-      const calcResult = numberMainBox / Number(`${display}`);
-      setNumberMainBox(calcResult);
-      setDisplay(`${calcResult}`);
-    }
+
     setLastOperator(operator);
     setIsLastInputOperator(true);
 
     if (operator === "reset") {
       // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
       setNumberMainBox(null);
-      setDisplay ("");
+      setDisplay("");
       setLastOperator(null);
-      setIsLastInputOperator(false); 
+      setIsLastInputOperator(false);
     }
   };
 
@@ -94,8 +98,9 @@ const Home: NextPage = () => {
             >
               9
             </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("reset")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("reset")}
             >
               🐰
             </button>
@@ -117,8 +122,9 @@ const Home: NextPage = () => {
             >
               6
             </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("=")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("=")}
             >
               =
             </button>
@@ -140,8 +146,9 @@ const Home: NextPage = () => {
             >
               3
             </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("+")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("+")}
             >
               +
             </button>
@@ -157,13 +164,15 @@ const Home: NextPage = () => {
             >
               ÷
             </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("×")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("×")}
             >
               ×
             </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("-")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("-")}
             >
               -
             </button>
