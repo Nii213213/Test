@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { useState } from "react";
-import { isUndefined } from "util";
+import { useState, useCallback } from "react";
+import NumberButton from "@components/NumberButton";
+import NumberDisplay from "@components/NumberDisplay";
 
 const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
@@ -12,49 +13,56 @@ const Home: NextPage = () => {
   >(null);
   const [numberMainBox, setNumberMainBox] = useState<number | null>(null);
 
-  const pressNumber = (number: number) => {
-    if (isLastInputOperator) {
-      setNumberMainBox(Number(`${display}`));
-      setDisplay(`${number}`);
-    } else {
-      setDisplay(`${display}${number}`);
+  const pressNumber = useCallback(
+    (number: number) => {
+      if (isLastInputOperator) {
+        setIsLastInputOperator(false);
+
+        setNumberMainBox(Number(`${display}`));
+        setDisplay(`${number}`);
+      } else {
+        setDisplay((current) => `${current}${number}`);
+      }
+    },
+    [isLastInputOperator]
+  );
+
+  const calculate = (operator: string, num1: number, num2: number): number => {
+    switch (operator) {
+      case "+":
+        return num1 + num2;
+      case "-":
+        return num1 - num2;
+      case "×":
+        return num1 * num2;
+      case "÷":
+        return num1 / num2;
+      default:
+        return num1;
     }
   };
 
   const pressOperator = (operator: string) => {
-    if (lastOperator === "+" && numberMainBox) {
-      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
-      const calcResult = numberMainBox + Number(`${display}`);
+    if (numberMainBox) {
+      const calcResult = calculate(
+        lastOperator!,
+        numberMainBox,
+        Number(display)
+      );
+
       setNumberMainBox(calcResult);
       setDisplay(`${calcResult}`);
     }
-    if (lastOperator === "-" && numberMainBox) {
-      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
-      const calcResult = numberMainBox - Number(`${display}`);
-      setNumberMainBox(calcResult);
-      setDisplay(`${calcResult}`);
-    }
-    if (lastOperator === "×" && numberMainBox) {
-      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
-      const calcResult = numberMainBox * Number(`${display}`);
-      setNumberMainBox(calcResult);
-      setDisplay(`${calcResult}`);
-    }
-    if (lastOperator === "÷" && numberMainBox) {
-      // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
-      const calcResult = numberMainBox / Number(`${display}`);
-      setNumberMainBox(calcResult);
-      setDisplay(`${calcResult}`);
-    }
+
     setLastOperator(operator);
     setIsLastInputOperator(true);
 
     if (operator === "reset") {
       // XXX: setNumberMainBoxの直後、numberMainBoxが更新されてるとは限らない
       setNumberMainBox(null);
-      setDisplay ("");
+      setDisplay("");
       setLastOperator(null);
-      setIsLastInputOperator(false); 
+      setIsLastInputOperator(false);
     }
   };
 
@@ -69,33 +77,13 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           <div className="grid grid-cols-4 gap-3">
-            <input
-              value={display}
-              type="text"
-              placeholder="You can't touch this"
-              className="col-span-4 input input-bordered w-full max-w-xs"
-              disabled
-            />
+            <NumberDisplay display={display} />
+            <NumberButton num={7} onPressNumber={pressNumber} />
+            <NumberButton num={8} onPressNumber={pressNumber} />
+            <NumberButton num={9} onPressNumber={pressNumber} />
             <button
               className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(7)}
-            >
-              7
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(8)}
-            >
-              8
-            </button>
-            <button
-              className="btn btn-circle btn-outline"
-              onClick={() => pressNumber(9)}
-            >
-              9
-            </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("reset")}
+              onClick={() => pressOperator("reset")}
             >
               🐰
             </button>
@@ -117,8 +105,9 @@ const Home: NextPage = () => {
             >
               6
             </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("=")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("=")}
             >
               =
             </button>
@@ -140,8 +129,9 @@ const Home: NextPage = () => {
             >
               3
             </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("+")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("+")}
             >
               +
             </button>
@@ -157,13 +147,15 @@ const Home: NextPage = () => {
             >
               ÷
             </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("×")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("×")}
             >
               ×
             </button>
-            <button className="btn btn-circle btn-outline"
-            onClick={() => pressOperator("-")}
+            <button
+              className="btn btn-circle btn-outline"
+              onClick={() => pressOperator("-")}
             >
               -
             </button>
