@@ -13,9 +13,9 @@ const firebaseConfig = {
   storageBucket: "banana-sheep.appspot.com",
   messagingSenderId: "971898478966",
   appId: "1:971898478966:web:6cc1ed1a60386f208a1a57",
-  measurementId: "G-7M2R8BN063"
+  measurementId: "G-7M2R8BN063",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export { app };

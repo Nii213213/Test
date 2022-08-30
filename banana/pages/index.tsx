@@ -1,10 +1,18 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import NumberButton from "@components/NumberButton";
 import NumberDisplay from "@components/NumberDisplay";
 import OperatorButton from "@components/OperatorButton";
+import { app } from "../firebase/firebase";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 
 const Home: NextPage = () => {
   const [display, setDisplay] = useState("");
@@ -13,6 +21,17 @@ const Home: NextPage = () => {
     boolean | null
   >(null);
   const [numberMainBox, setNumberMainBox] = useState<number | null>(null);
+
+  useEffect(() => {
+    const db = getFirestore(app);
+    getDocs(collection(db, "higuchi")).then((querySnapshot: any) => {
+      querySnapshot.forEach((doc: any) => {
+        console.log(`${doc.id} | ${doc.data().age}`);
+      });
+    });
+
+    setDoc(doc(collection(db, "higuchi"), "kazuya"), { age: 51 });
+  }, []);
 
   const pressNumber = useCallback(
     (number: number) => {
@@ -82,19 +101,19 @@ const Home: NextPage = () => {
             <NumberButton num={7} onPressNumber={pressNumber} />
             <NumberButton num={8} onPressNumber={pressNumber} />
             <NumberButton num={9} onPressNumber={pressNumber} />
-            <OperatorButton operator={"🐰"} onPressOperator={pressOperator}/>
+            <OperatorButton operator={"🐰"} onPressOperator={pressOperator} />
             <NumberButton num={4} onPressNumber={pressNumber} />
             <NumberButton num={5} onPressNumber={pressNumber} />
             <NumberButton num={6} onPressNumber={pressNumber} />
-            <OperatorButton operator={"="} onPressOperator={pressOperator}/>
+            <OperatorButton operator={"="} onPressOperator={pressOperator} />
             <NumberButton num={1} onPressNumber={pressNumber} />
             <NumberButton num={2} onPressNumber={pressNumber} />
             <NumberButton num={3} onPressNumber={pressNumber} />
-            <OperatorButton operator={"+"} onPressOperator={pressOperator}/>
+            <OperatorButton operator={"+"} onPressOperator={pressOperator} />
             <NumberButton num={0} onPressNumber={pressNumber} />
-            <OperatorButton operator={"÷"} onPressOperator={pressOperator}/>
-            <OperatorButton operator={"×"} onPressOperator={pressOperator}/>
-            <OperatorButton operator={"-"} onPressOperator={pressOperator}/>
+            <OperatorButton operator={"÷"} onPressOperator={pressOperator} />
+            <OperatorButton operator={"×"} onPressOperator={pressOperator} />
+            <OperatorButton operator={"-"} onPressOperator={pressOperator} />
           </div>
         </h1>
       </main>
