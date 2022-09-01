@@ -20,18 +20,8 @@ const Home: NextPage = () => {
   const [isLastInputOperator, setIsLastInputOperator] = useState<
     boolean | null
   >(null);
-  const [numberMainBox, setNumberMainBox] = useState<number | null>(null);
-
-  useEffect(() => {
-    const db = getFirestore(app);
-    getDocs(collection(db, "higuchi")).then((querySnapshot: any) => {
-      querySnapshot.forEach((doc: any) => {
-        console.log(`${doc.id} | ${doc.data().age}`);
-      });
-    });
-
-    setDoc(doc(collection(db, "higuchi"), "kazuya"), { age: 51 });
-  }, []);
+  const [iskeep, setiskeep] = useState<boolean | null>(null);
+    const [numberMainBox, setNumberMainBox] = useState<number | null>(null);
 
   const pressNumber = useCallback(
     (number: number) => {
@@ -84,6 +74,22 @@ const Home: NextPage = () => {
       setLastOperator(null);
       setIsLastInputOperator(false);
     }
+
+    if (operator === "keep") {
+      [iskeep]
+    }
+
+  };
+  
+  if(iskeep){
+      const db = getFirestore(app);
+      getDocs(collection(db, "higuchi")).then((querySnapshot: any) => {
+        querySnapshot.forEach((doc: any) => {
+          console.log(`${doc.id} | ${doc.data().age}`);
+        });
+      });
+      setDoc(doc(collection(db, "keepdata"), "keeta"), { keeta:Number(`${display}`)});
+     [];
   };
 
   return (
