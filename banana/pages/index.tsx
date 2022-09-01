@@ -114,6 +114,8 @@ const Home: NextPage = () => {
             <OperatorButton operator={"÷"} onPressOperator={pressOperator} />
             <OperatorButton operator={"×"} onPressOperator={pressOperator} />
             <OperatorButton operator={"-"} onPressOperator={pressOperator} />
+            <OperatorButton operator={"data"} onPressOperator={pressOperator} />
+            <OperatorButton operator={"keep"} onPressOperator={pressOperator} />
           </div>
         </h1>
       </main>
