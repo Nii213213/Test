@@ -10,7 +10,7 @@ import {
   getFirestore,
   collection,
   doc,
-  getDocs,
+  getDoc,
   setDoc,
 } from "firebase/firestore";
 
@@ -20,8 +20,9 @@ const Home: NextPage = () => {
   const [isLastInputOperator, setIsLastInputOperator] = useState<
     boolean | null
   >(null);
-  const [iskeep, setiskeep] = useState<boolean | null>(null);
-    const [numberMainBox, setNumberMainBox] = useState<number | null>(null);
+  const [numberMainBox, setNumberMainBox] = useState<number | null>(null);
+  const collectionName = "calculated_data";
+  const docName = "result";
 
   const pressNumber = useCallback(
     (number: number) => {
@@ -74,22 +75,25 @@ const Home: NextPage = () => {
       setLastOperator(null);
       setIsLastInputOperator(false);
     }
-
-    if (operator === "keep") {
-      [iskeep]
-    }
-
   };
-  
-  if(iskeep){
-      const db = getFirestore(app);
-      getDocs(collection(db, "higuchi")).then((querySnapshot: any) => {
-        querySnapshot.forEach((doc: any) => {
-          console.log(`${doc.id} | ${doc.data().age}`);
-        });
-      });
-      setDoc(doc(collection(db, "keepdata"), "keeta"), { keeta:Number(`${display}`)});
-     [];
+
+  // TODO: dbからデータを読み込む -> 読み込んだデータをdisplay変数に格納する
+  const read = () => {
+    const db = getFirestore(app);
+
+    const docRef = doc(db, collectionName, docName);
+    getDoc(docRef).then((docSnap: any) => {
+      const num = docSnap.data().number;
+      setDisplay(num.toString());
+    });
+  };
+
+  // TODO: dbにdisplay変数の内容を保存する
+  const store = () => {
+    const db = getFirestore(app);
+    const calcDataCollection = collection(db, collectionName);
+    const calcDataDoc = doc(calcDataCollection, docName);
+    setDoc(calcDataDoc, { number: Number(display) });
   };
 
   return (
@@ -120,9 +124,13 @@ const Home: NextPage = () => {
             <OperatorButton operator={"÷"} onPressOperator={pressOperator} />
             <OperatorButton operator={"×"} onPressOperator={pressOperator} />
             <OperatorButton operator={"-"} onPressOperator={pressOperator} />
-            <OperatorButton operator={"data"} onPressOperator={pressOperator} />
-            <OperatorButton operator={"keep"} onPressOperator={pressOperator} />
           </div>
+          <button className="btn btn-primary" onClick={read}>
+            read
+          </button>
+          <button className="btn btn-secondary ml-8" onClick={store}>
+            store
+          </button>
         </h1>
       </main>
     </div>
